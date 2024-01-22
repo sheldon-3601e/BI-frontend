@@ -1,7 +1,19 @@
 declare namespace API {
+  type BaseResponseBiResponse_ = {
+    code?: number;
+    data?: BiResponse;
+    message?: string;
+  };
+
   type BaseResponseBoolean_ = {
     code?: number;
     data?: boolean;
+    message?: string;
+  };
+
+  type BaseResponseChart_ = {
+    code?: number;
+    data?: Chart;
     message?: string;
   };
 
@@ -20,6 +32,12 @@ declare namespace API {
   type BaseResponseLong_ = {
     code?: number;
     data?: string;
+    message?: string;
+  };
+
+  type BaseResponsePageChart_ = {
+    code?: number;
+    data?: PageChart_;
     message?: string;
   };
 
@@ -71,18 +89,76 @@ declare namespace API {
     message?: string;
   };
 
-  type checkUsingGETParams = {
-    /** echostr */
-    echostr?: string;
-    /** nonce */
-    nonce?: string;
-    /** signature */
-    signature?: string;
-    /** timestamp */
-    timestamp?: string;
+  type BiResponse = {
+    genChart?: string;
+    genResult?: string;
+    id?: string;
+  };
+
+  type Chart = {
+    chartData?: string;
+    chartType?: string;
+    createTime?: string;
+    genChart?: string;
+    genResult?: string;
+    goal?: string;
+    id?: string;
+    isDelete?: number;
+    name?: string;
+    updateTime?: string;
+    userId?: string;
+  };
+
+  type ChartAddRequest = {
+    chartData?: string;
+    chartType?: string;
+    goal?: string;
+    name?: string;
+  };
+
+  type ChartEditRequest = {
+    chartData?: string;
+    chartType?: string;
+    goal?: string;
+    id?: string;
+    name?: string;
+  };
+
+  type ChartQueryRequest = {
+    chartData?: string;
+    chartType?: string;
+    current?: number;
+    genChart?: string;
+    genResult?: string;
+    goal?: string;
+    id?: string;
+    name?: string;
+    pageSize?: number;
+    sortField?: string;
+    sortOrder?: string;
+    userId?: string;
+  };
+
+  type ChartUpdateRequest = {
+    chartData?: string;
+    chartType?: string;
+    goal?: string;
+    id?: string;
+    name?: string;
   };
 
   type DeleteRequest = {
+    id?: string;
+  };
+
+  type genChartByAiUsingPOSTParams = {
+    chartType?: string;
+    goal?: string;
+    name?: string;
+  };
+
+  type getChartByIdUsingGETParams = {
+    /** id */
     id?: string;
   };
 
@@ -114,6 +190,19 @@ declare namespace API {
   type OrderItem = {
     asc?: boolean;
     column?: string;
+  };
+
+  type PageChart_ = {
+    countId?: string;
+    current?: string;
+    maxLimit?: string;
+    optimizeCountSql?: boolean;
+    orders?: OrderItem[];
+    pages?: string;
+    records?: Chart[];
+    searchCount?: boolean;
+    size?: string;
+    total?: string;
   };
 
   type PagePost_ = {
@@ -260,8 +349,8 @@ declare namespace API {
     updateTime?: string;
     userAccount?: string;
     userAvatar?: string;
+    userName?: string;
     userPassword?: string;
-    userProfile?: string;
     userRole?: string;
   };
 
