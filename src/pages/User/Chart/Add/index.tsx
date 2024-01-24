@@ -82,7 +82,7 @@ const ChartAdd: React.FC = () => {
 
   return (
     <div className={'chart-add'}>
-      <PageContainer title={'智能分析'}>
+      <PageContainer>
         <Row gutter={24}>
           <Col span={12}>
             <Card title={'数据输入'}>

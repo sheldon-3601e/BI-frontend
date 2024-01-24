@@ -55,7 +55,7 @@ const ChartAddAsync: React.FC = () => {
   };
 
   return (
-    <PageContainer title={'智能分析'}>
+    <PageContainer>
       <div className={'chart-add-async'}>
         <Card>
           <Form
