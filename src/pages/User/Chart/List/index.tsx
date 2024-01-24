@@ -1,4 +1,4 @@
-import { listMyChartByPageUsingPost } from '@/services/backend/chartController';
+import {listMyChartByPageUsingPost} from '@/services/backend/chartController';
 import {
   ClockCircleTwoTone,
   LikeOutlined,
@@ -7,14 +7,13 @@ import {
   StarOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
+import {PageContainer} from '@ant-design/pro-components';
 import '@umijs/max';
-import { Button, Card, FloatButton, List, message, Result, Space, Switch } from 'antd';
+import {Button, Card, FloatButton, List, message, Result, Space, Switch} from 'antd';
 import Search from 'antd/es/input/Search';
 import ReactECharts from 'echarts-for-react';
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'umi';
-import {values} from "lodash";
+import React, {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'umi';
 
 /**
  * 图表管理页面
