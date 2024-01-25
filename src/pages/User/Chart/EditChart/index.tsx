@@ -1,5 +1,5 @@
 import {
-  genChartByAiAsyncUsingPost,
+  genUpdateChartByAiAsyncUsingPost,
   getChartByIdUsingGet,
 } from '@/services/backend/chartController';
 import { UploadOutlined } from '@ant-design/icons';
@@ -20,11 +20,10 @@ import {
   Upload,
 } from 'antd';
 import TextArea from 'antd/es/input/TextArea';
+import ReactECharts from 'echarts-for-react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import ReactECharts from 'echarts-for-react';
-import useForm from 'antd/es/form/hooks/useForm';
-import { history } from 'umi'
+import { history } from 'umi';
 
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -42,8 +41,7 @@ const normFile = (e: any) => {
 const ChartAdd: React.FC = () => {
   const [chartData, setChartData] = useState<API.Chart>();
   const [submitLoading, setSubmitLoading] = useState(false);
-  const params = useParams();
-  const [form] = useForm();
+  const params= useParams();
 
   const loadData = async () => {
     const res = await getChartByIdUsingGet({
@@ -55,10 +53,6 @@ const ChartAdd: React.FC = () => {
       message.error('数据加载失败');
     }
   };
-
-  useEffect(() => {
-    loadData();
-  }, []);
 
   /**
    * 提交分析数据
@@ -72,16 +66,18 @@ const ChartAdd: React.FC = () => {
 
     setSubmitLoading(true);
     const { name, goal, chartType, file } = values;
-    const params = {
+    const chartId = params.id;
+    const genChatParams = {
+      chartId,
       name,
       goal,
       chartType,
     };
     try {
-      const res = await genChartByAiAsyncUsingPost(params, {}, file[0].originFileObj);
+      const res = await genUpdateChartByAiAsyncUsingPost(genChatParams, {}, file[0].originFileObj);
       if (res.data) {
         message.success('图表分析任务提交成功，请稍后在图标管理页面查看');
-        form.resetFields();
+        history.back();
       } else {
         message.error('图表分析任务提交失败，请您重试');
       }
@@ -93,12 +89,16 @@ const ChartAdd: React.FC = () => {
     setSubmitLoading(false);
   };
 
+  useEffect(() => {
+    loadData();
+  }, []);
+
   return (
     <PageContainer key={chartData?.id}>
       <Row gutter={24}>
         <Col span={12}>
           <Card title={'数据输入'}>
-            <Form form={form} name="addChart" {...formItemLayout} onFinish={onFinish} style={{ maxWidth: 600 }}>
+            <Form name="addChart" onFinish={onFinish} {...formItemLayout} style={{ maxWidth: 600 }}>
               <Form.Item initialValue={chartData?.name} name="name" label="图表名称">
                 <Input placeholder="请输入名称" />
               </Form.Item>
