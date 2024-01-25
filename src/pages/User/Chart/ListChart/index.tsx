@@ -1,4 +1,7 @@
-import {listMyChartByPageUsingPost} from '@/services/backend/chartController';
+import {
+  deleteChartUsingPost,
+  listMyChartByPageUsingPost,
+} from '@/services/backend/chartController';
 import {
   ClockCircleTwoTone,
   LikeOutlined,
@@ -7,13 +10,13 @@ import {
   StarOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
-import {PageContainer} from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
 import '@umijs/max';
-import {Button, Card, FloatButton, List, message, Result, Space, Switch} from 'antd';
+import { Button, Card, FloatButton, List, message, Result, Space, Switch } from 'antd';
 import Search from 'antd/es/input/Search';
 import ReactECharts from 'echarts-for-react';
-import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate} from 'umi';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'umi';
 
 /**
  * 图表管理页面
@@ -123,6 +126,22 @@ const UserAdminPage: React.FC = () => {
     message.success('刷新数据成功');
   };
 
+  const handleDelete = async (id: string | undefined) => {
+    try {
+      const res = await deleteChartUsingPost({
+        id,
+      });
+      if (res.data) {
+        message.success('删除图表成功');
+        await loadData();
+      } else {
+        message.error('删除图表失败，请您重试');
+      }
+    } catch (e: any) {
+      message.error('系统错误');
+    }
+  };
+
   useEffect(() => {
     loadData();
   }, [searchParams]);
@@ -181,7 +200,7 @@ const UserAdminPage: React.FC = () => {
               unCheckedChildren="关闭"
               onChange={(values) => setAuthLoadData(values)}
             />
-          </Card>
+          </Card>,
         ],
       }}
     >
@@ -231,9 +250,21 @@ const UserAdminPage: React.FC = () => {
             <Card
               title={item.name}
               extra={
-                <Button href={`/chart/list/${item.id}`} type={'primary'}>
-                  查看数据
-                </Button>
+                <>
+                  <Button
+                    style={{ marginRight: '16px' }}
+                    type={'primary'}
+                    href={`/chart/edit/${item.id}`}
+                  >
+                    编辑
+                  </Button>
+                  <Button style={{ marginRight: '16px' }} href={`/chart/show/${item.id}`}>
+                    查看数据
+                  </Button>
+                  <Button danger onClick={() => handleDelete(item.id)} type={'primary'}>
+                    删除
+                  </Button>
+                </>
               }
             >
               <List.Item.Meta description={item.chartType} />
