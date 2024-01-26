@@ -1,4 +1,4 @@
-import { genChartByAiAsyncUsingPost } from '@/services/backend/chartController';
+import { genChartByAiAsyncMqUsingPost } from '@/services/backend/chartController';
 import { UploadOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, Form, Input, message, Select, Space, Upload } from 'antd';
@@ -41,7 +41,7 @@ const ChartAddAsync: React.FC = () => {
       chartType,
     };
     try {
-      const res = await genChartByAiAsyncUsingPost(params, {}, file[0].originFileObj);
+      const res = await genChartByAiAsyncMqUsingPost(params, {}, file[0].originFileObj);
       if (res.data) {
         message.success('图表分析任务提交成功，请稍后在图标管理页面查看');
         form.resetFields();

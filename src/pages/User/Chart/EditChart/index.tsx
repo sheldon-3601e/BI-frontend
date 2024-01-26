@@ -23,7 +23,7 @@ import TextArea from 'antd/es/input/TextArea';
 import ReactECharts from 'echarts-for-react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { history } from 'umi';
+import { history, useNavigate } from 'umi';
 
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -41,7 +41,8 @@ const normFile = (e: any) => {
 const ChartAdd: React.FC = () => {
   const [chartData, setChartData] = useState<API.Chart>();
   const [submitLoading, setSubmitLoading] = useState(false);
-  const params= useParams();
+  const params = useParams();
+  const navigate = useNavigate();
 
   const loadData = async () => {
     const res = await getChartByIdUsingGet({

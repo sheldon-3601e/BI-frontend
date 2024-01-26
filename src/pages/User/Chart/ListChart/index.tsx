@@ -86,9 +86,15 @@ const UserAdminPage: React.FC = () => {
         setTotal(res.data.total ?? 0);
         if (res.data.records) {
           res.data.records.forEach((data) => {
-            const chartOptions = JSON.parse(data.genChart ?? '{}');
-            chartOptions.title = undefined;
-            data.genChart = JSON.stringify(chartOptions);
+            try {
+              const chartOptions = JSON.parse(data.genChart ?? '{}');
+              chartOptions.title = undefined;
+              data.genChart = JSON.stringify(chartOptions);
+            } catch (e: any) {
+              data.genChart = undefined;
+              data.status = -1;
+            }
+
           });
         }
       } else {
@@ -111,7 +117,7 @@ const UserAdminPage: React.FC = () => {
     updateSearchParams(newSearchParams);
   };
 
-  // 处理分页变化
+  // 分页
   const handlePageChange = (page: number) => {
     const newSearchParams = {
       ...searchParams,
@@ -120,17 +126,19 @@ const UserAdminPage: React.FC = () => {
     updateSearchParams(newSearchParams);
   };
 
-  // 重新获取数据
+  // 更新数据
   const handleClick = async () => {
     await loadData();
     message.success('刷新数据成功');
   };
 
+  // 删除图表
   const handleDelete = async (id: string | undefined) => {
     try {
       const res = await deleteChartUsingPost({
         id,
       });
+      console.log(res)
       if (res.data) {
         message.success('删除图表成功');
         await loadData();
@@ -142,10 +150,12 @@ const UserAdminPage: React.FC = () => {
     }
   };
 
+  // 监听查询参数的变化，更新数据
   useEffect(() => {
     loadData();
   }, [searchParams]);
 
+  // 自动刷新
   useEffect(() => {
     // 如果 autoRefresh 为 true，则每三十秒调用一次 loadData
     let intervalId: NodeJS.Timeout | null = null;
@@ -153,7 +163,7 @@ const UserAdminPage: React.FC = () => {
     if (authLoadData) {
       intervalId = setInterval(() => {
         loadData();
-      }, 30000);
+      }, 5000);
     }
 
     // 在组件卸载时清除定时器
