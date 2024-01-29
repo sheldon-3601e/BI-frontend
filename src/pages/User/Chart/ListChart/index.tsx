@@ -280,6 +280,8 @@ const UserAdminPage: React.FC = () => {
               <List.Item.Meta description={item.chartType} />
               <p>{'分析目标：' + item.goal}</p>
               <div className="margin-16" />
+              <p>{'分析结论：' + item.genResult}</p>
+              <div className="margin-16" />
               {renderChartStatus(item)}
             </Card>
             <div className="margin-16" />
