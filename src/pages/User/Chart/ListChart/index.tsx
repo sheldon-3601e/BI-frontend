@@ -1,22 +1,12 @@
-import {
-  deleteChartUsingPost,
-  listMyChartByPageUsingPost,
-} from '@/services/backend/chartController';
-import {
-  ClockCircleTwoTone,
-  LikeOutlined,
-  MessageOutlined,
-  PlayCircleTwoTone,
-  StarOutlined,
-  SyncOutlined,
-} from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
+import {renderChartStatus} from '@/chartUtils';
+import {deleteChartUsingPost, listMyChartByPageUsingPost,} from '@/services/backend/chartController';
+import {LikeOutlined, MessageOutlined, StarOutlined, SyncOutlined,} from '@ant-design/icons';
+import {PageContainer} from '@ant-design/pro-components';
 import '@umijs/max';
-import { Button, Card, FloatButton, List, message, Result, Space, Switch } from 'antd';
+import {Button, Card, FloatButton, List, message, Space, Switch} from 'antd';
 import Search from 'antd/es/input/Search';
-import ReactECharts from 'echarts-for-react';
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'umi';
+import React, {useEffect, useState} from 'react';
+import {useLocation, useNavigate} from 'umi';
 
 /**
  * 图表管理页面
@@ -30,14 +20,6 @@ const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
     {text}
   </Space>
 );
-
-// 图表状态枚举
-const ChartStatusEnum = {
-  WAIT: 0,
-  WORKING: 1,
-  SUCCEED: 2,
-  FAILED: -1,
-};
 
 const UserAdminPage: React.FC = () => {
   const navigate = useNavigate();
@@ -94,7 +76,6 @@ const UserAdminPage: React.FC = () => {
               data.genChart = undefined;
               data.status = -1;
             }
-
           });
         }
       } else {
@@ -138,7 +119,7 @@ const UserAdminPage: React.FC = () => {
       const res = await deleteChartUsingPost({
         id,
       });
-      console.log(res)
+      console.log(res);
       if (res.data) {
         message.success('删除图表成功');
         await loadData();
@@ -173,31 +154,6 @@ const UserAdminPage: React.FC = () => {
       }
     };
   }, [authLoadData]);
-
-  // 渲染图表状态
-  const renderChartStatus = (item: API.Chart) => {
-    if (item.status === ChartStatusEnum.WAIT) {
-      return (
-        <Result
-          icon={<PlayCircleTwoTone />}
-          title="待生成"
-          subTitle="当前服务器繁忙，请您耐心等待..."
-        />
-      );
-    } else if (item.status === ChartStatusEnum.WORKING) {
-      return (
-        <Result
-          icon={<ClockCircleTwoTone />}
-          title="生成中"
-          subTitle="图表正在生成，请您耐心等待..."
-        />
-      );
-    } else if (item.status === ChartStatusEnum.SUCCEED) {
-      return <ReactECharts style={{ width: '100%' }} option={JSON.parse(item.genChart ?? '')} />;
-    } else if (item.status === ChartStatusEnum.FAILED) {
-      return <Result status="error" title="错误" subTitle="图表生成错误，请您重试" />;
-    }
-  };
 
   return (
     <PageContainer
@@ -279,6 +235,8 @@ const UserAdminPage: React.FC = () => {
             >
               <List.Item.Meta description={item.chartType} />
               <p>{'分析目标：' + item.goal}</p>
+              <div className="margin-16" />
+              <p>{'分析结论：' + item.genResult}</p>
               <div className="margin-16" />
               {renderChartStatus(item)}
             </Card>
