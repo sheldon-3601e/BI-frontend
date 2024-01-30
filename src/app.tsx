@@ -5,8 +5,31 @@ import defaultSettings from '../config/defaultSettings';
 import { AvatarDropdown } from './components/RightContent/AvatarDropdown';
 import { requestConfig } from './requestConfig';
 import { getLoginUserUsingGet } from '@/services/backend/userController';
+import { connectWebSocket } from '@/webSocket';
+import {Button, notification, Space} from 'antd';
 
 const loginPath = '/user/login';
+
+// 在全局弹窗中显示消息
+const key = `open${Date.now()}`;
+const btn = (
+  <Space>
+    <Button type="link" size="small" onClick={() => notification.destroy()}>
+      取消
+    </Button>
+    <Button type="primary" size="small" onClick={() => window.location.href='/chart/list'}>
+      查看
+    </Button>
+  </Space>
+);
+const openNotification = () => {
+  notification.open({
+    message: '图表生成结束',
+    btn,
+    key,
+    onClose: close,
+  });
+};
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
@@ -25,6 +48,7 @@ export async function getInitialState(): Promise<InitialState> {
       // 如果未登录
     }
   }
+  connectWebSocket(initialState.currentUser?.id as string, openNotification)
   return initialState;
 }
 
