@@ -1,6 +1,7 @@
 export default [
   { path: '/user', layout: false, routes: [{ path: '/user/login', component: './User/Login' }] },
   { path: '/welcome', icon: 'smile', component: './Welcome', name: "欢迎页" },
+  { path: '/test/webSocket', icon: 'smile', component: './User/Test/webSocket', name: "测试" },
   {
     path: '/chart',
     icon: 'unorderedListOutlined',

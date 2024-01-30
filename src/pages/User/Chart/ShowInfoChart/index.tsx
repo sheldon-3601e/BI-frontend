@@ -1,12 +1,13 @@
 import { renderChartStatus } from '@/chartUtils';
 import { getChartByIdUsingGet, getChartInfoByIdUsingGet } from '@/services/backend/chartController';
 import {
-  PageContainer, ProCard,
+  PageContainer,
+  ProCard,
   ProDescriptions,
   ProDescriptionsActionType,
 } from '@ant-design/pro-components';
 import '@umijs/max';
-import {Button, Card, Checkbox, CheckboxOptionType, Col, Divider, Row, Table} from 'antd';
+import { Button, Checkbox, CheckboxOptionType, Col, Divider, Row, Table } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router';
 
