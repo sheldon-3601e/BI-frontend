@@ -1,9 +1,9 @@
 import {renderChartStatus} from '@/chartUtils';
 import {deleteChartUsingPost, listMyChartByPageUsingPost,} from '@/services/backend/chartController';
-import {LikeOutlined, MessageOutlined, StarOutlined, SyncOutlined,} from '@ant-design/icons';
+import {SyncOutlined} from '@ant-design/icons';
 import {PageContainer} from '@ant-design/pro-components';
 import '@umijs/max';
-import {Button, Card, FloatButton, List, message, Space, Switch} from 'antd';
+import {Button, Card, FloatButton, List, message, Switch} from 'antd';
 import Search from 'antd/es/input/Search';
 import React, {useEffect, useState} from 'react';
 import {useLocation, useNavigate} from 'umi';
@@ -13,13 +13,6 @@ import {useLocation, useNavigate} from 'umi';
  *
  * @constructor
  */
-
-const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
-  <Space>
-    {React.createElement(icon)}
-    {text}
-  </Space>
-);
 
 const UserAdminPage: React.FC = () => {
   const navigate = useNavigate();
@@ -205,16 +198,11 @@ const UserAdminPage: React.FC = () => {
         }}
         dataSource={chartDataList}
         renderItem={(item) => (
-          <List.Item
-            key={item.id}
-            actions={[
-              <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
-              <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
-              <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
-            ]}
-          >
+          <List.Item key={item.id}>
             <Card
+              style={{backgroundColor: '#f5f4f1'}}
               title={item.name}
+              hoverable
               extra={
                 <>
                   <Button

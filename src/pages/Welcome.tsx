@@ -3,11 +3,6 @@ import { useModel } from '@umijs/max';
 import { Card, theme } from 'antd';
 import React from 'react';
 
-/**
- * 每个单独的卡片，为了复用样式抽成了组件
- * @param param0
- * @returns
- */
 const InfoCard: React.FC<{
   title: string;
   index: number;
@@ -85,7 +80,6 @@ const InfoCard: React.FC<{
 
 const Welcome: React.FC = () => {
   const { token } = theme.useToken();
-  const { initialState } = useModel('@@initialState');
   return (
     <PageContainer>
       <Card
@@ -93,41 +87,33 @@ const Welcome: React.FC = () => {
           borderRadius: 8,
         }}
         bodyStyle={{
-          backgroundImage:
-            initialState?.settings?.navTheme === 'realDark'
-              ? 'background-image: linear-gradient(75deg, #1A1B1F 0%, #191C1F 100%)'
-              : 'background-image: linear-gradient(75deg, #FBFDFF 0%, #F5F7FF 100%)',
+          backgroundColor: '#f5f4f1'
         }}
       >
-        <div
-          style={{
-            backgroundPosition: '100% -30%',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: '274px auto',
-            backgroundImage:
-              "url('https://gw.alipayobjects.com/mdn/rms_a9745b/afts/img/A*BuFmQqsB2iAAAAAAAAAAAAAAARQnAQ')",
-          }}
-        >
+        <div>
           <div
             style={{
               fontSize: '20px',
               color: token.colorTextHeading,
             }}
           >
-            欢迎使用 Ant Design Pro
+            欢迎来到我们的BI平台！
           </div>
           <p
             style={{
               fontSize: '14px',
-              color: token.colorTextSecondary,
               lineHeight: '22px',
               marginTop: 16,
               marginBottom: 32,
-              width: '65%',
+              width: '80%',
             }}
           >
-            Ant Design Pro 是一个整合了 umi，Ant Design 和 ProComponents
-            的脚手架方案。致力于在设计规范和基础组件的基础上，继续向上构建，提炼出典型模板/业务组件/配套设计资源，进一步提升企业级中后台产品设计研发过程中的『用户』和『设计者』的体验。
+            我们的平台是一款革命性的商业智能工具，旨在让数据分析变得更加简单直观。与传统的BI平台不同，我们的平台摒弃了繁琐的图表创建和数据选择过程，让用户专注于他们的分析需求。
+            <p />
+            无需花费时间选择数据和创建图表。您只需输入您的分析需求以及数据来源，我们的平台将自动为您生成符合您需求的图表。无论您是想了解销售趋势、用户行为还是市场预测，我们的平台都能为您提供定制化的解决方案。
+            <p />
+            我们的平台采用先进的人工智能技术，通过理解您的需求和数据，快速生成适合您的可视化图表，让您能够更轻松地发现数据背后的价值，做出明智的商业决策。
+            <p />
           </p>
           <div
             style={{
@@ -138,21 +124,21 @@ const Welcome: React.FC = () => {
           >
             <InfoCard
               index={1}
-              href="https://umijs.org/docs/introduce/introduce"
-              title="了解 umi"
-              desc="umi 是一个可扩展的企业级前端应用框架,umi 以路由为基础的，同时支持配置式路由和约定式路由，保证路由的功能完备，并以此进行功能扩展。"
+              href="/chart/add"
+              title="分析图表（同步）"
+              desc="同步分析图表是我们平台的一个强大工具，旨在帮助您在分析数据量较小，想及时得到结论的分析场景中，更快，更稳定的得到数据之间的关系，并从中发现有价值的见解，从而更全面地理解数据背后的故事！"
             />
             <InfoCard
               index={2}
-              title="了解 ant design"
-              href="https://ant.design"
-              desc="antd 是基于 Ant Design 设计体系的 React UI 组件库，主要用于研发企业级中后台产品。"
+              href="/chart/add_async"
+              title="分析图表（异步）"
+              desc="异步分析图表是我们平台的一个强大功能，旨在让您能够以自己的节奏深入分析数据，发现数据中的模式和见解。与传统的同步分析不同，异步分析允许您根据自己的需求和时间安排进行数据探索，而不受时间和空间的限制！"
             />
             <InfoCard
               index={3}
-              title="了解 Pro Components"
-              href="https://procomponents.ant.design"
-              desc="ProComponents 是一个基于 Ant Design 做了更高抽象的模板组件，以 一个组件就是一个页面为开发理念，为中后台开发带来更好的体验。"
+              title="管理图表"
+              href="/chart/list"
+              desc="在我们的平台上，我们为您提供了全面的图表管理工具，帮助您轻松管理和组织您的数据可视化。"
             />
           </div>
         </div>
