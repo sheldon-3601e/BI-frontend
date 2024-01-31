@@ -2,7 +2,6 @@ import { genChartByAiUsingPost } from '@/services/backend/chartController';
 import { UploadOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import {
-  Alert,
   Button,
   Card,
   Col,
@@ -85,7 +84,7 @@ const ChartAdd: React.FC = () => {
       <PageContainer>
         <Row gutter={24}>
           <Col span={12}>
-            <Card title={'数据输入'}>
+            <Card title={'数据输入'} style={{ backgroundColor: '#f5f4f1' }} hoverable>
               <Form
                 name="addChart"
                 {...formItemLayout}
@@ -150,7 +149,7 @@ const ChartAdd: React.FC = () => {
             </Card>
           </Col>
           <Col span={12}>
-            <Card title={'可视化图表'}>
+            <Card title={'可视化图表'} style={{ backgroundColor: '#f5f4f1' }} hoverable >
               <Spin spinning={submitLoading}>
                 {chartData ? (
                   <ReactECharts option={options} />
@@ -163,7 +162,7 @@ const ChartAdd: React.FC = () => {
           </Col>
         </Row>
         <Divider></Divider>
-        <Card title={'数据结论'}>
+        <Card title={'数据结论'} style={{ backgroundColor: '#f5f4f1' }} hoverable>
           <Spin spinning={submitLoading}>
             {chartData?.genResult ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
           </Spin>

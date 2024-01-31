@@ -57,7 +57,7 @@ const ChartAddAsync: React.FC = () => {
   return (
     <PageContainer>
       <div className={'chart-add-async'}>
-        <Card>
+        <Card style={{ backgroundColor: '#f5f4f1' }} hoverable title={'数据输入'}>
           <Form
             form={form}
             name="addChart"
