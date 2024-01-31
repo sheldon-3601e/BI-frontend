@@ -9,13 +9,13 @@ const Settings: ProLayoutProps & {
 } = {
   navTheme: 'light',
   // 拂晓蓝
-  colorPrimary: '#1890ff',
+  colorPrimary: '#00668c',
   layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: '洞见智能平台',
+  title: '洞见智能BI平台',
   logo:'/bi_logo.svg',
   pwa: true,
   iconfontUrl: '',

@@ -1,25 +1,23 @@
 import Footer from '@/components/Footer';
-import {userLoginUsingPost} from '@/services/backend/userController';
-import {LockOutlined, UserOutlined} from '@ant-design/icons';
-import {LoginForm, ProFormText} from '@ant-design/pro-components';
-import {useEmotionCss} from '@ant-design/use-emotion-css';
-import {Helmet, history, useModel} from '@umijs/max';
-import {message, Tabs} from 'antd';
-import React, {useState} from 'react';
+import { userLoginUsingPost } from '@/services/backend/userController';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LoginForm, ProFormText } from '@ant-design/pro-components';
+import { useEmotionCss } from '@ant-design/use-emotion-css';
+import { Helmet, history, useModel } from '@umijs/max';
+import { message, Tabs } from 'antd';
+import React, { useState } from 'react';
 import Settings from '../../../../config/defaultSettings';
 
 const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
-  const {initialState, setInitialState} = useModel('@@initialState');
+  const { initialState, setInitialState } = useModel('@@initialState');
   const containerClassName = useEmotionCss(() => {
     return {
       display: 'flex',
       flexDirection: 'column',
       height: '100vh',
       overflow: 'auto',
-      backgroundImage:
-        "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
-      backgroundSize: '100% 100%',
+      backgroundColor: '#fffefb',
     };
   });
 
@@ -64,9 +62,11 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" style={{height: '100%'}} src={'/bi_logo.svg'}/>}
+          logo={<img alt="logo" style={{ height: '100%' }} src={'/bi_logo.svg'} />}
           title="洞见"
-          subTitle={'智能BI数据分析平台'}
+          subTitle={
+            '洞见智能BI平台摒弃了繁琐的图表创建和数据选择过程，旨在让数据分析变得更加简单直观，让用户专注于他们的分析需求。'
+          }
           initialValues={{
             autoLogin: true,
           }}
@@ -91,7 +91,7 @@ const Login: React.FC = () => {
                 name="userAccount"
                 fieldProps={{
                   size: 'large',
-                  prefix: <UserOutlined/>,
+                  prefix: <UserOutlined />,
                 }}
                 placeholder={'请输入账号'}
                 rules={[
@@ -105,7 +105,7 @@ const Login: React.FC = () => {
                 name="userPassword"
                 fieldProps={{
                   size: 'large',
-                  prefix: <LockOutlined/>,
+                  prefix: <LockOutlined />,
                 }}
                 placeholder={'请输入密码'}
                 rules={[
@@ -117,18 +117,9 @@ const Login: React.FC = () => {
               />
             </>
           )}
-
-          <div
-            style={{
-              marginBottom: 24,
-              textAlign: 'right',
-            }}
-          >
-            <a>新用户注册</a>
-          </div>
         </LoginForm>
       </div>
-      <Footer/>
+      <Footer />
     </div>
   );
 };
