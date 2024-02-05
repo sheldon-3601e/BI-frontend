@@ -1,7 +1,7 @@
 import { genChartByAiAsyncMqUsingPost } from '@/services/backend/chartController';
 import { UploadOutlined } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
-import { Button, Card, Form, Input, message, Select, Space, Upload } from 'antd';
+import { PageContainer, ProCard } from '@ant-design/pro-components';
+import { Button, Form, Input, message, Select, Space, Upload } from 'antd';
 import useForm from 'antd/es/form/hooks/useForm';
 import TextArea from 'antd/es/input/TextArea';
 import React, { useState } from 'react';
@@ -57,7 +57,7 @@ const ChartAddAsync: React.FC = () => {
   return (
     <PageContainer>
       <div className={'chart-add-async'}>
-        <Card style={{ backgroundColor: '#f5f4f1' }} hoverable title={'数据输入'}>
+        <ProCard style={{ backgroundColor: '#f5f4f1' }} boxShadow title={'数据输入'}>
           <Form
             form={form}
             name="addChart"
@@ -118,7 +118,7 @@ const ChartAddAsync: React.FC = () => {
               <Button htmlType="reset">重置</Button>
             </Space>
           </Form>
-        </Card>
+        </ProCard>
       </div>
     </PageContainer>
   );

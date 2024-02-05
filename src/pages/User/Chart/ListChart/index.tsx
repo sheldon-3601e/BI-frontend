@@ -1,12 +1,15 @@
-import {renderChartStatus} from '@/chartUtils';
-import {deleteChartUsingPost, listMyChartByPageUsingPost,} from '@/services/backend/chartController';
-import {SyncOutlined} from '@ant-design/icons';
-import {PageContainer} from '@ant-design/pro-components';
+import { ChartStatusEnum, renderChartStatus } from '@/chartUtils';
+import {
+  deleteChartUsingPost,
+  listMyChartByPageUsingPost,
+} from '@/services/backend/chartController';
+import { SyncOutlined } from '@ant-design/icons';
+import { PageContainer, ProCard } from '@ant-design/pro-components';
 import '@umijs/max';
-import {Button, Card, FloatButton, List, message, Switch} from 'antd';
+import { Button, FloatButton, List, message, Switch } from 'antd';
 import Search from 'antd/es/input/Search';
-import React, {useEffect, useState} from 'react';
-import {useLocation, useNavigate} from 'umi';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'umi';
 
 /**
  * 图表管理页面
@@ -152,14 +155,14 @@ const UserAdminPage: React.FC = () => {
     <PageContainer
       header={{
         extra: [
-          <Card key={1} size="small" bordered={false} style={{ marginBottom: 16 }}>
+          <ProCard key={1} size="small" bordered={false} style={{ marginBottom: 16 }}>
             <span style={{ marginRight: 16 }}>自动刷新</span>
             <Switch
               checkedChildren="开启"
               unCheckedChildren="关闭"
               onChange={(values) => setAuthLoadData(values)}
             />
-          </Card>,
+          </ProCard>,
         ],
       }}
     >
@@ -199,10 +202,10 @@ const UserAdminPage: React.FC = () => {
         dataSource={chartDataList}
         renderItem={(item) => (
           <List.Item key={item.id}>
-            <Card
-              style={{backgroundColor: '#f5f4f1'}}
+            <ProCard
+              style={{ backgroundColor: '#f5f4f1' }}
               title={item.name}
-              hoverable
+              boxShadow
               extra={
                 <>
                   <Button
@@ -212,9 +215,11 @@ const UserAdminPage: React.FC = () => {
                   >
                     编辑
                   </Button>
-                  <Button style={{ marginRight: '16px' }} href={`/chart/show/${item.id}`}>
-                    查看数据
-                  </Button>
+                  {item.status !== ChartStatusEnum.FAILED && (
+                    <Button style={{ marginRight: '16px' }} href={`/chart/show/${item.id}`}>
+                      查看数据
+                    </Button>
+                  )}
                   <Button danger onClick={() => handleDelete(item.id)} type={'primary'}>
                     删除
                   </Button>
@@ -227,7 +232,7 @@ const UserAdminPage: React.FC = () => {
               <p>{'分析结论：' + item.genResult}</p>
               <div className="margin-16" />
               {renderChartStatus(item)}
-            </Card>
+            </ProCard>
             <div className="margin-16" />
           </List.Item>
         )}

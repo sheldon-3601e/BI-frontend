@@ -3,7 +3,7 @@ import {
   getChartByIdUsingGet,
 } from '@/services/backend/chartController';
 import { UploadOutlined } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
+import { PageContainer, ProCard } from '@ant-design/pro-components';
 import {
   Button,
   Card,
@@ -42,8 +42,7 @@ const ChartAdd: React.FC = () => {
   const [chartData, setChartData] = useState<API.Chart>();
   const [submitLoading, setSubmitLoading] = useState(false);
   const params = useParams();
-  const navigate = useNavigate();
-
+  useNavigate();
   const loadData = async () => {
     const res = await getChartByIdUsingGet({
       id: params.id,
@@ -98,7 +97,7 @@ const ChartAdd: React.FC = () => {
     <PageContainer key={chartData?.id}>
       <Row gutter={24}>
         <Col span={12}>
-          <Card title={'数据输入'}>
+          <ProCard title={'数据输入'} boxShadow>
             <Form name="addChart" onFinish={onFinish} {...formItemLayout} style={{ maxWidth: 600 }}>
               <Form.Item initialValue={chartData?.name} name="name" label="图表名称">
                 <Input placeholder="请输入名称" />
@@ -157,7 +156,7 @@ const ChartAdd: React.FC = () => {
                 </Space>
               </Form.Item>
             </Form>
-          </Card>
+          </ProCard>
         </Col>
         <Col span={12}>
           <Card title={'可视化图表'}>

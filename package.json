@@ -41,6 +41,8 @@
     "not ie <= 10"
   ],
   "dependencies": {
+    "@af-utils/virtual-core": "^0.0.19",
+    "@af-utils/virtual-react": "^0.0.20",
     "@ant-design/icons": "^4.8.0",
     "@ant-design/pro-components": "^2.3.57",
     "@ant-design/use-emotion-css": "1.0.4",

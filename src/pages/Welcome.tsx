@@ -1,5 +1,5 @@
-import { PageContainer } from '@ant-design/pro-components';
-import { Card, theme } from 'antd';
+import { PageContainer, ProCard } from '@ant-design/pro-components';
+import { theme } from 'antd';
 import React from 'react';
 
 const InfoCard: React.FC<{
@@ -81,14 +81,14 @@ const Welcome: React.FC = () => {
   const { token } = theme.useToken();
   return (
     <PageContainer>
-      <Card
+      <ProCard
         style={{
           borderRadius: 8,
         }}
         bodyStyle={{
           backgroundColor: '#f5f4f1',
         }}
-        hoverable
+        boxShadow
       >
         <div>
           <div
@@ -142,7 +142,7 @@ const Welcome: React.FC = () => {
             />
           </div>
         </div>
-      </Card>
+      </ProCard>
     </PageContainer>
   );
 };

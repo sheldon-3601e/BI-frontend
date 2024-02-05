@@ -1,24 +1,10 @@
-import { genChartByAiUsingPost } from '@/services/backend/chartController';
-import { UploadOutlined } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-components';
-import {
-  Button,
-  Card,
-  Col,
-  Divider,
-  Empty,
-  Form,
-  Input,
-  message,
-  Row,
-  Select,
-  Space,
-  Spin,
-  Upload,
-} from 'antd';
+import {genChartByAiUsingPost} from '@/services/backend/chartController';
+import {UploadOutlined} from '@ant-design/icons';
+import {PageContainer, ProCard} from '@ant-design/pro-components';
+import {Button, Col, Divider, Empty, Form, Input, message, Row, Select, Space, Spin, Upload,} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import ReactECharts from 'echarts-for-react';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 const formItemLayout = {
   labelCol: { span: 6 },
@@ -84,7 +70,7 @@ const ChartAdd: React.FC = () => {
       <PageContainer>
         <Row gutter={24}>
           <Col span={12}>
-            <Card title={'数据输入'} style={{ backgroundColor: '#f5f4f1' }} hoverable>
+            <ProCard title={'数据输入'} style={{ backgroundColor: '#f5f4f1' }} hoverable>
               <Form
                 name="addChart"
                 {...formItemLayout}
@@ -146,10 +132,10 @@ const ChartAdd: React.FC = () => {
                   </Space>
                 </Form.Item>
               </Form>
-            </Card>
+            </ProCard>
           </Col>
           <Col span={12}>
-            <Card title={'可视化图表'} style={{ backgroundColor: '#f5f4f1' }} hoverable >
+            <ProCard title={'可视化图表'} style={{ backgroundColor: '#f5f4f1' }} boxShadow >
               <Spin spinning={submitLoading}>
                 {chartData ? (
                   <ReactECharts option={options} />
@@ -157,16 +143,16 @@ const ChartAdd: React.FC = () => {
                   <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
                 )}
               </Spin>
-            </Card>
+            </ProCard>
 
           </Col>
         </Row>
         <Divider></Divider>
-        <Card title={'数据结论'} style={{ backgroundColor: '#f5f4f1' }} hoverable>
+        <ProCard title={'数据结论'} style={{ backgroundColor: '#f5f4f1' }} boxShadow>
           <Spin spinning={submitLoading}>
             {chartData?.genResult ?? <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
           </Spin>
-        </Card>
+        </ProCard>
       </PageContainer>
     </div>
   );
